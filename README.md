@@ -23,7 +23,7 @@ Expects <b>msg.payload</b> with request params.
 - The url to request Zabbix API.
 
 ### API
-- jabbix jsonrpc API
+- zabbix jsonrpc API
 - ref this url : https://www.zabbix.com/documentation/current/manual/api
 
 ## parameter example
