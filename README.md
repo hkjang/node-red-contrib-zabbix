@@ -21,6 +21,7 @@ Expects <b>msg.payload</b> with request params.
 
 ### API URL
 - The url to request Zabbix API.
+- ex) http://$ZABBIX_SERER_URL/api_jsonrpc.php
 
 ### API
 - zabbix jsonrpc API
