@@ -26,7 +26,6 @@ module.exports = function(RED) {
                     node[i] = msg[i] || node[i];
                 }
             }
-            node.error(node.api);
             var zabbix = new Zabbix({
                 url: node.zabbixAPIURL,
                 user: node.user,
