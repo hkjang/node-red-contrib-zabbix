@@ -23,15 +23,16 @@ module.exports = function(RED) {
         this.on('input', function (msg){
             for (var i in msg) {
                 if (i !== 'req' && i !== 'res' && i !== 'payload' && i !== 'send' && i !== '_msgid' && i !== 'topic') {
-                    node[i] = node[i] || msg[i];
+                    node[i] = msg[i] || node[i];
                 }
             }
-            const zabbix = new Zabbix({
+            node.error(node.api);
+            var zabbix = new Zabbix({
                 url: node.zabbixAPIURL,
                 user: node.user,
                 password: node.passwd
             });
-            const main = async () => {
+            var main = async () => {
                 try {
                     await zabbix.login();
                     msg.payload = await zabbix.request(node.api, msg.payload);
@@ -39,7 +40,7 @@ module.exports = function(RED) {
                     node.send(msg);
                 }catch (err){
                     node.error(err);
-                    msg.payload = err;
+                    msg.payload = JSON.parse(err);
                     node.send(msg);
                 }
             }
