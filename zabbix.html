@@ -1,0 +1,83 @@
+<script type="text/html" data-template-name="zabbix">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span
+                data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-api"><i class="fa"></i> API</label>
+        <input type="text" id="node-input-api" placeholder="API, ex) host.get, alert.get ...">
+    </div>
+    <div class="form-row">
+        <label for="node-input-creds"> <i class="fa"></i> Zabbix Node</span></label>
+        <input type="text" id="node-input-creds">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="zabbix">
+   <p>Request <b>msg.payload</b> params to zabbix API.</p>
+   <p>Simple way to request zabbix API.</p>
+   <p><a href="https://github.com/sumitgoelpw/zabbix-promise" target="_new">ref this</a></p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('zabbix',{
+        category: 'function',
+        defaults: {
+            name: {value:""},
+            api: {value: ""},
+            creds: {
+                value: "",
+                type: "zabbixNode"
+            },
+        },
+        color:"#d40000",
+        icon: "zabbix.png",
+        align: "left",
+        inputs:1,
+        outputs:1,
+        label: function() {
+            return this.name|| "zabbix";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="zabbixNode">
+    <div class="form-row">
+        <label for="node-input-name"> <i class="fa fa-tag fa-fw"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-zabbixAPIURL"><i class="fa fa-link"></i> API URL</label>
+        <input type="text" id="node-config-input-zabbixAPIURL" placeholder= "zabbix API URL">
+    </div>
+    <div class="form-row">
+      <label for="node-config-input-user"> user</label>
+      <input type="text" id="node-config-input-user" placeholder="user">
+    </div>
+    <div class="form-row">
+      <label for="node-config-input-passwd"> password</label>
+      <input type="password" id="node-config-input-passwd" placeholder="password">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('zabbixNode', {
+        category: 'config',
+        defaults: {
+            name: {value: ""}
+        },
+        credentials: {
+            zabbixAPIURL: {},
+            user: {},
+            passwd: {}
+        },
+        label: function () {
+            return this.name || 'API Info';
+        }
+    });
+</script>
+
