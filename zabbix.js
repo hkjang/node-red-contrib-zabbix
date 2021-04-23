@@ -34,9 +34,7 @@ module.exports = function(RED) {
             const main = async () => {
                 try {
                     await zabbix.login();
-                    const result = await zabbix.request(node.api, msg.payload);
-                    // msg.payload = JSON.stringify(result, null, 2);
-                    msg.payload = result;
+                    msg.payload = await zabbix.request(node.api, msg.payload);
                     zabbix.logout();
                     node.send(msg);
                 }catch (err){
